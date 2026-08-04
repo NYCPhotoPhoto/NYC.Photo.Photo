@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NYC.PHOTO — Couples &amp; Graduation Photography in New York</title>
+<meta name="description" content="New York couples and graduation photography — proposals, engagements, pre-weddings, and graduation portraits shot on digital and 35mm film." />
+
+<!-- Open Graph / social preview (edit url + image once you publish) -->
+<meta property="og:title" content="NYC.PHOTO — Couples & Graduation Photography" />
+<meta property="og:description" content="Couples & graduation photography around New York. Shot on digital and 35mm film." />
+<meta property="og:type" content="website" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2316161a'/%3E%3Ccircle cx='16' cy='17' r='7' fill='none' stroke='%23f3f2ee' stroke-width='2.4'/%3E%3Ccircle cx='19.4' cy='13.6' r='2.3' fill='%23c0594e'/%3E%3C/svg%3E" />
+
+<!-- ============================================================
+     FONTS — display: Bricolage Grotesque · body: Newsreader · captions: Space Mono
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --paper:   #f3f2ee;   /* gallery-wall warm white */
+  --paper-2: #e9e7e0;   /* recessed panels */
+  --ink:     #16161a;   /* near-black text */
+  --ink-soft:#43434a;
+  --muted:   #8c8b85;   /* captions / metadata */
+  --line:    #d6d4cc;   /* hairlines */
+  --signal:  #c0594e;   /* warm safelight — used ONLY on the live dot + focus */
+
+  --display: "Bricolage Grotesque", sans-serif;
+  --serif:   "Newsreader", Georgia, serif;
+  --mono:    "Space Mono", ui-monospace, monospace;
+
+  --maxw: 1320px;
+  --gut: clamp(18px, 4vw, 56px);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+img{ display:block; max-width:100%; }
+a{ color:inherit; }
+
+/* visible keyboard focus everywhere */
+:focus-visible{
+  outline:2px solid var(--signal);
+  outline-offset:3px;
+}
+
+/* skip link for keyboard users */
+.skip{
+  position:absolute; left:-999px; top:0; z-index:200;
+  background:var(--ink); color:var(--paper); padding:10px 16px;
+  font-family:var(--mono); font-size:12px; letter-spacing:.06em;
+}
+.skip:focus{ left:8px; top:8px; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; row-gap:8px;
+  padding:14px var(--gut);
+  background:color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.brand{
+  font-family:var(--mono); font-weight:700;
+  letter-spacing:.04em; font-size:14px; text-decoration:none;
+  display:flex; align-items:center; gap:8px;
+}
+.brand .dot{
+  width:7px; height:7px; border-radius:50%;
+  background:var(--signal);
+  box-shadow:0 0 0 0 color-mix(in srgb, var(--signal) 60%, transparent);
+  animation:pulse 2.6s ease-out infinite;
+}
+@keyframes pulse{
+  0%{ box-shadow:0 0 0 0 color-mix(in srgb, var(--signal) 55%, transparent); }
+  70%{ box-shadow:0 0 0 7px color-mix(in srgb, var(--signal) 0%, transparent); }
+  100%{ box-shadow:0 0 0 0 transparent; }
+}
+@media (prefers-reduced-motion: reduce){ .brand .dot{ animation:none; } }
+
+.nav-links{
+  display:flex; flex-wrap:wrap; gap:10px 22px;
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+}
+@media (max-width:480px){
+  .nav-links{ width:100%; gap:8px 16px; font-size:11.5px; }
+}
+.nav-links a{ text-decoration:none; color:var(--ink-soft); position:relative; padding-bottom:2px; }
+.nav-links a::after{
+  content:""; position:absolute; left:0; bottom:-1px; height:1px; width:0; background:var(--ink);
+  transition:width .25s ease;
+}
+.nav-links a:hover{ color:var(--ink); }
+.nav-links a:hover::after{ width:100%; }
+
+/* ============================================================
+   HERO  — masthead + film index + cover frame
+   ============================================================ */
+.hero{
+  max-width:var(--maxw); margin:0 auto;
+  padding:clamp(40px,7vw,96px) var(--gut) clamp(28px,4vw,52px);
+  display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(24px,4vw,56px);
+  align-items:end;
+}
+.kicker{
+  font-family:var(--mono); font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:18px;
+  display:flex; gap:14px; align-items:center;
+}
+.kicker .rule{ flex:1; height:1px; background:var(--line); }
+
+.masthead{
+  font-family:var(--display); font-weight:800;
+  font-size:clamp(54px, 12vw, 150px); line-height:.86;
+  letter-spacing:-.03em; margin:0;
+}
+.masthead em{ font-style:normal; display:block; color:var(--ink); }
+.masthead .thin{ font-weight:500; color:var(--ink-soft); }
+
+.lede{
+  font-family:var(--serif); font-weight:300; font-size:clamp(18px,2.4vw,23px);
+  line-height:1.45; color:var(--ink-soft); max-width:36ch; margin:26px 0 0;
+}
+.lede b{ font-weight:400; color:var(--ink); }
+
+/* film index */
+.index{ margin-top:32px; border-top:1px solid var(--line); }
+.index a{
+  display:flex; align-items:baseline; gap:16px; text-decoration:none;
+  padding:11px 2px; border-bottom:1px solid var(--line);
+  font-family:var(--display); font-weight:700; font-size:clamp(17px,2.2vw,21px);
+  letter-spacing:-.01em; color:var(--ink);
+  transition:padding-left .25s ease, color .2s ease;
+}
+.index a .no{ font-family:var(--mono); font-weight:400; font-size:12px; color:var(--muted); width:34px; flex:none; }
+.index a .meta{ margin-left:auto; font-family:var(--mono); font-weight:400; font-size:11.5px; color:var(--muted); }
+.index a:hover{ padding-left:14px; color:var(--ink); background:linear-gradient(90deg, var(--paper-2), transparent 60%); }
+
+/* cover frame */
+.cover{
+  position:relative; aspect-ratio:4/5; border:1px solid var(--line);
+  background:#000; overflow:hidden; align-self:end;
+}
+.cover img{ width:100%; height:100%; object-fit:cover; }
+.cover .frame-label{
+  position:absolute; left:10px; top:10px; z-index:2;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:#fff; opacity:.85;
+  mix-blend-mode:difference;
+}
+.cover .frame-label.r{ left:auto; right:10px; }
+.cover .frame-label.b{ top:auto; bottom:10px; }
+.cover svg.mark{ width:100%; height:100%; }
+.cover svg.mark .mark-word{
+  font-family:var(--display); font-weight:800; font-size:40px; letter-spacing:-.01em; fill:#f3f2ee;
+}
+.cover svg.mark .mark-kicker{
+  font-family:var(--mono); font-size:12px; letter-spacing:.24em; fill:#8c8b85;
+}
+
+/* ============================================================
+   PLACEHOLDER TILES (duotone) — auto-used until a real photo src is set
+   ============================================================ */
+.ph{ position:relative; width:100%; height:100%; }
+.ph::after{   /* film grain */
+  content:""; position:absolute; inset:0; opacity:.10; mix-blend-mode:overlay; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.ph .swap{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:rgba(255,255,255,.78); border:1px dashed rgba(255,255,255,.4);
+  padding:6px 10px; white-space:nowrap; text-align:center; line-height:1.6;
+}
+
+/* ============================================================
+   WORK
+   ============================================================ */
+.work{ max-width:var(--maxw); margin:0 auto; padding:clamp(40px,6vw,80px) var(--gut); }
+.section-head{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:20px;
+  border-bottom:2px solid var(--ink); padding-bottom:14px; margin-bottom:26px;
+}
+.section-head h2{
+  font-family:var(--display); font-weight:800; font-size:clamp(28px,5vw,46px);
+  letter-spacing:-.02em; margin:0;
+}
+.section-head .tag{ font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+
+.filters{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px; }
+.filters button{
+  font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  background:transparent; color:var(--ink-soft); border:1px solid var(--line);
+  padding:8px 14px; cursor:pointer; border-radius:0;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+}
+.filters button:hover{ border-color:var(--ink); color:var(--ink); }
+.filters button[aria-pressed="true"]{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
+/* gallery groups — one per shoot, told as a filmstrip + a short story */
+.gallery-block{ margin-bottom:clamp(48px,7vw,84px); }
+.gallery-block:last-child{ margin-bottom:0; }
+
+/* horizontal filmstrip, edge to edge, scrolls sideways */
+.filmstrip-wrap{ position:relative; }
+.filmstrip{
+  display:flex; gap:3px; overflow-x:auto; scroll-behavior:smooth;
+  scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+}
+.frame{
+  flex:0 0 auto; height:clamp(220px,32vw,440px); position:relative;
+  scroll-snap-align:start; cursor:pointer; background:#000; overflow:hidden;
+  opacity:0; transform:translateY(10px);
+}
+.frame.in{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease; }
+@media (prefers-reduced-motion: reduce){ .frame{ opacity:1; transform:none; } }
+.frame img{ height:100%; width:auto; max-width:none; display:block; transition:transform .5s ease; }
+.frame:hover img{ transform:scale(1.02); }
+.frame .frame-corner{
+  position:absolute; top:8px; left:9px; z-index:2;
+  font-family:var(--mono); font-size:10px; color:#fff; opacity:.7; mix-blend-mode:difference;
+}
+
+.fs-btn{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:5;
+  width:38px; height:38px; border:1px solid var(--line); border-radius:50%;
+  background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(6px);
+  cursor:pointer; font-family:var(--serif); font-size:19px; color:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+}
+.fs-btn:hover{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+.fs-prev{ left:10px; } .fs-next{ right:10px; }
+@media (max-width:700px){ .fs-btn{ display:none; } }
+
+/* theme + short editorial story, under the filmstrip */
+.gallery-story{
+  display:grid; grid-template-columns:.7fr 1.3fr; gap:clamp(18px,4vw,48px);
+  padding-top:18px; align-items:start;
+}
+.gallery-story h3{
+  font-family:var(--serif); font-style:italic; font-weight:400;
+  font-size:clamp(23px,3vw,32px); letter-spacing:-.01em; color:var(--ink); margin:0;
+}
+.gallery-story .count{
+  font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--muted);
+  text-transform:uppercase; display:block; margin-top:8px;
+}
+.gallery-story p{
+  font-family:var(--serif); font-weight:300; font-size:clamp(15px,1.6vw,17px);
+  line-height:1.65; color:var(--ink-soft); margin:0;
+}
+@media (max-width:700px){ .gallery-story{ grid-template-columns:1fr; } }
+
+.empty{
+  font-family:var(--mono); font-size:13px; color:var(--muted);
+  border:1px dashed var(--line); padding:40px; text-align:center;
+}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox{
+  position:fixed; inset:0; z-index:100; display:none;
+  background:rgba(12,12,13,.94); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center; padding:clamp(16px,4vw,48px);
+}
+.lightbox.open{ display:flex; }
+.lightbox figure{ margin:0; max-width:min(1000px,92vw); max-height:88vh; display:flex; flex-direction:column; gap:12px; }
+.lightbox .stage{ flex:1; min-height:0; display:flex; align-items:center; justify-content:center; }
+.lightbox .stage > *{ max-height:74vh; aspect-ratio:auto; }
+.lightbox .lb-ph{ width:min(680px,86vw); aspect-ratio:4/5; position:relative; border:1px solid rgba(255,255,255,.15); }
+.lightbox figcaption{
+  font-family:var(--mono); font-size:12px; color:rgba(255,255,255,.8);
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+.lb-btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:none; border:none; color:#fff; font-size:34px; cursor:pointer;
+  padding:18px; opacity:.7; font-family:var(--serif);
+}
+.lb-btn:hover{ opacity:1; }
+.lb-prev{ left:4px; } .lb-next{ right:4px; }
+.lb-close{
+  position:absolute; top:6px; right:8px; background:none; border:none; color:#fff;
+  font-family:var(--mono); font-size:13px; letter-spacing:.1em; cursor:pointer; opacity:.8;
+  padding:14px; min-height:44px;
+}
+.lb-close:hover{ opacity:1; }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about{
+  max-width:var(--maxw); margin:0 auto; padding:clamp(40px,6vw,80px) var(--gut);
+}
+.about-body{ max-width:68ch; }
+.about-body h2{
+  font-family:var(--display); font-weight:800; font-size:clamp(26px,4vw,40px);
+  letter-spacing:-.02em; margin:0 0 18px;
+}
+.about-body p{ font-weight:300; font-size:clamp(17px,1.8vw,20px); line-height:1.6; color:var(--ink-soft); max-width:54ch; }
+.about-body p b{ font-weight:400; color:var(--ink); }
+.facts{ margin-top:30px; border-top:1px solid var(--line); max-width:54ch; }
+.facts .row{
+  display:flex; gap:20px; padding:12px 0; border-bottom:1px solid var(--line);
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.03em;
+}
+.facts .row .k{ color:var(--muted); text-transform:uppercase; width:130px; flex:none; }
+.facts .row .v{ color:var(--ink); }
+
+/* ============================================================
+   GEAR
+   ============================================================ */
+.gear{ max-width:var(--maxw); margin:0 auto; padding:0 var(--gut) clamp(40px,6vw,80px); }
+.gear-lede{
+  font-family:var(--serif); font-weight:300; font-size:clamp(17px,1.8vw,20px);
+  line-height:1.6; color:var(--ink-soft); max-width:60ch; margin:0 0 30px;
+}
+.gear-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(18px,3vw,28px); }
+@media (max-width:820px){ .gear-grid{ grid-template-columns:1fr; } }
+.gear-card{ border:1px solid var(--line); background:var(--paper-2); padding:clamp(22px,3vw,32px); }
+.gear-card h3{ font-family:var(--display); font-weight:800; font-size:clamp(20px,2.4vw,24px); letter-spacing:-.01em; margin:0 0 4px; }
+.gear-card .sub{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact{
+  background:var(--ink); color:var(--paper);
+  padding:clamp(56px,9vw,120px) var(--gut);
+}
+.contact-inner{ max-width:var(--maxw); margin:0 auto; }
+.contact .eyebrow{ font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#9a9892; margin-bottom:20px; }
+.contact a.big{
+  font-family:var(--display); font-weight:800; letter-spacing:-.03em; text-decoration:none;
+  font-size:clamp(30px,7vw,92px); line-height:.95; color:var(--paper);
+  display:inline-block; position:relative; word-break:break-word;
+}
+.contact a.big::after{ content:""; display:block; height:2px; width:0; background:var(--paper); transition:width .3s ease; }
+.contact a.big:hover::after{ width:100%; }
+.contact-row{
+  display:flex; flex-wrap:wrap; gap:14px 36px; margin-top:42px;
+  font-family:var(--mono); font-size:13px; letter-spacing:.04em;
+}
+.contact-row a{ color:var(--paper); text-decoration:none; opacity:.85; }
+.contact-row a:hover{ opacity:1; text-decoration:underline; text-underline-offset:4px; }
+.contact-row .label{ color:#86847d; text-transform:uppercase; font-size:11px; display:block; margin-bottom:5px; }
+
+footer{
+  padding:24px var(--gut); display:flex; justify-content:flex-end;
+  font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--muted);
+  border-top:1px solid var(--line);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:820px){
+  .hero{ grid-template-columns:1fr; }
+  .cover{ order:-1; aspect-ratio:16/11; }
+}
+</style>
+</head>
+<body>
+
+<a href="#work" class="skip">Skip to work</a>
+
+<!-- ======================= NAV ======================= -->
+<nav class="nav">
+  <a href="#top" class="brand"><span class="dot" aria-hidden="true"></span>NYC.PHOTO</a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#gear">Gear</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ======================= HERO ======================= -->
+<header id="top" class="hero">
+  <div>
+    <div class="kicker">New York, NY <span class="rule"></span> Est. <span data-cfg="est"></span></div>
+    <h1 class="masthead"><em>The day</em><span class="thin">everything</span><em>changed.</em></h1>
+    <p class="lede">Couples &amp; graduation photography by <b data-cfg="name"></b> — proposals, engagements, and the moment you toss the cap, all shot around New York on digital &amp; 35mm film.</p>
+
+    <nav class="index" aria-label="Work categories">
+      <a href="#work" data-jump="Couples"><span class="no">01</span> Couples <span class="meta">— together, in love</span></a>
+      <a href="#work" data-jump="Graduation"><span class="no">02</span> Graduation <span class="meta">— caps off</span></a>
+    </nav>
+  </div>
+
+  <div class="cover">
+    <!-- Cover photo: set COVER.src in the config below to your hero shot -->
+    <div id="coverSlot" class="ph" aria-hidden="true">
+      <span class="swap">Cover frame<br/>add your hero shot</span>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= WORK ======================= -->
+<main id="work" class="work">
+  <div class="section-head">
+    <h2>Selected Work</h2>
+    <span class="tag" id="count">— frames</span>
+  </div>
+
+  <div class="filters" id="filters" role="group" aria-label="Filter work by category"></div>
+
+  <div id="grid"></div>
+</main>
+
+<!-- ======================= LIGHTBOX ======================= -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lb-close" id="lbClose">[ ESC ] CLOSE</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <figure>
+    <div class="stage" id="lbStage"></div>
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next">›</button>
+</div>
+
+<!-- ======================= ABOUT ======================= -->
+<section id="about" class="about">
+  <div class="about-body">
+    <h2>About</h2>
+    <p><b>I photograph people on the best days of their lives.</b> Proposals where hands are still shaking, engagements full of nervous laughter, the half-second after a cap goes up — those are the frames I live for. I shoot on a mix of digital and 35mm film for couples and grads in and around New York.</p>
+    <p>Booking proposals, engagements, pre-weddings, and graduation sessions across NYC and beyond.</p>
+    <div class="facts">
+      <div class="row"><span class="k">Based</span><span class="v" data-cfg="location"></span></div>
+      <div class="row"><span class="k">Shoots</span><span class="v">Couples · Proposals · Graduation</span></div>
+      <div class="row"><span class="k">Kit</span><span class="v">Leica Q · Fujifilm X-S20</span></div>
+      <div class="row"><span class="k">Booking</span><span class="v">Now — sessions &amp; packages</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= GEAR ======================= -->
+<section id="gear" class="gear">
+  <div class="section-head">
+    <h2>Gear</h2>
+    <span class="tag">— what shot this</span>
+  </div>
+  <p class="gear-lede">Every frame on this site comes off one of two bodies — a fixed-lens rangefinder-style camera for wide, intimate environmental portraits, and a lightweight mirrorless zoom kit for coverage that moves fast on a shoot day.</p>
+  <div class="gear-grid">
+    <div class="gear-card">
+      <h3>Leica Q (Typ 116)</h3>
+      <div class="sub">Full-frame · fixed lens</div>
+    </div>
+    <div class="gear-card">
+      <h3>Fujifilm X-S20</h3>
+      <div class="sub">APS-C · kit lens</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CONTACT ======================= -->
+<section id="contact" class="contact">
+  <div class="contact-inner">
+    <div class="eyebrow">Let's make something</div>
+    <a class="big" id="cfgEmail" href="#">email</a>
+    <div class="contact-row">
+      <div><span class="label">Phone</span><a id="cfgPhone" href="#"></a></div>
+      <div><span class="label">Instagram</span><a id="cfgIg" href="#" target="_blank" rel="noopener">@handle</a></div>
+      <div><span class="label">Location</span><span data-cfg="location"></span></div>
+      <div><span class="label">For</span><span style="opacity:.85">Couples · Proposals · Graduation</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>NYC.Photo</span>
+</footer>
+
+<script>
+/* ============================================================
+   ☆ EDIT THIS BLOCK — your details in one place ☆
+   ============================================================ */
+const SITE = {
+  name:        "Josia",                     // shown in the hero, about, footer
+  email:       "josiasilitonga@gmail.com",  // your contact email
+  phone:       "(256) 874-2855",            // shown, formatted for reading
+  phoneHref:   "+12568742855",              // digits only, used for the tel: link
+  instagram:   "nyc.photo.photo",           // handle WITHOUT the @
+  instagramUrl:"https://www.instagram.com/nyc.photo.photo/",
+  location:    "New York, NY",
+  est:         "2024",                      // year you started
+};
+
+/* Big cover frame (top-right of the hero). Set mark:true to show the NYC.PHOTO logo mark,
+   or set mark:false and src:"images/your-photo.jpg" to use a real photo instead. */
+const COVER = { mark:true, src:"", alt:"NYC.PHOTO logo mark" };
+
+/* ============================================================
+   ☆ YOUR PHOTOS LIVE HERE ☆
+   Photos are grouped into galleries. Each gallery has an internal `name`
+   (matches the folder in images/couples/ or images/graduation/, used only
+   to match photos to their gallery — never shown on the page), a public
+   `theme` line (the heading visitors see), and a short `story` — a couple
+   of sentences about the place and the day, shown under the filmstrip.
+   GALLERY_ORDER controls which galleries show up, and in what order —
+   a gallery with no photos yet still appears with a "coming soon" note.
+   ============================================================ */
+const GALLERY_ORDER = [
+  { name:"Eve", theme:"Cap & Cherry Blossoms", category:"Graduation",
+    story:"Columbia's campus does something to the light in late spring — cherry blossoms catch it, the Low Library steps hold onto it, and for one afternoon a cap and gown feel less like a uniform and more like a victory lap. This session moved slow, chasing shade under old trees and the quiet corners between classes, letting four years settle into a handful of frames." },
+  { name:"Sebastian & Helena", theme:"She Said Yes", category:"Couples",
+    story:"Central Park in a snowstorm empties out fast — which is exactly what made this proposal work. Bow Bridge, the frozen lake, the arcade at Bethesda Terrace: all of it draped in white, all of it nearly silent. Somewhere between the ring coming out of a coat pocket and the walk back through the snow, the whole park felt like it belonged to just the two of them." },
+  { name:"Gabby & Family", theme:"Confetti at the Garden", category:"Graduation",
+    story:"Convocation at Madison Square Garden is loud, bright, and over before you're ready — confetti falling under arena lights, a name called, a whole section standing up at once. Afterward the day slows back down on a Greenwich Village block, bouquet in hand, brick and awnings replacing the stage lights." },
+  { name:"Rani & Gani", theme:"Golden Hour, Brooklyn", category:"Couples",
+    story:"DUMBO in the late afternoon is all long shadows and cobblestone — the Manhattan Bridge overhead, the carousel lit up early, Brooklyn Bridge Park emptying out just enough to dance in the middle of it. This one was about finding the golden hour and refusing to let it end, block by block, until the skyline caught fire behind them." },
+  { name:"Janja & Denee", theme:"Best Friends, Capped", category:"Graduation",
+    story:"Some graduation days are really about the people who got there together. This one lived on the steps of Low Library and the lawn out front — caps thrown, arms slung over shoulders, the Alma Mater statue playing photobooth backdrop for a friend group who clearly weren't ready for four years to be over." },
+  { name:"Sarah & Adit", theme:"By Her Side", category:"Graduation",
+    story:"He wasn't the one graduating, but you wouldn't know it from how the day went — waiting on the subway platform, walking her through Central Park still in her gown, carrying her bouquet without being asked. Her cap and gown, his quiet presence in every frame: that's the whole story." },
+  { name:"Tiara & Friends", theme:"The Squad Graduates", category:"Graduation",
+    story:"A big friend group graduating together means one thing: joyful chaos. This session bounced between Low Library's steps, the Alma Mater statue, and a stairwell selfie nobody planned — a full crew, four years of college compressed into one afternoon of caps in the air." },
+];
+
+const PHOTOS = [
+  // ---- Eve ----
+  { subGallery:"Eve", category:"Graduation", location:"Columbia University", src:"images/graduation/eve/DSCF0575.jpg", alt:"Graduate in a blue gown outside a Columbia University campus building" },
+  { subGallery:"Eve", category:"Graduation", location:"Columbia University", src:"images/graduation/eve/L1550772.JPG", alt:"Graduate under cherry blossoms on the Columbia University campus" },
+  { subGallery:"Eve", category:"Graduation", location:"Columbia University", src:"images/graduation/eve/L1560113.JPG", alt:"Graduate lying on the lawn with her cap beside a Columbia residence hall" },
+  { subGallery:"Eve", category:"Graduation", location:"Columbia University", src:"images/graduation/eve/L1560236.jpg", alt:"Graduate walking down the steps of Columbia's Low Library" },
+  { subGallery:"Eve", category:"Graduation", location:"Columbia University", src:"images/graduation/eve/L1560389.jpg", alt:"Graduate crossing the street near Columbia's campus at dusk" },
+  { subGallery:"Eve", category:"Graduation", location:"Columbia University", src:"images/graduation/eve/L1550855.jpg", alt:"Graduate standing among the columns of Columbia's Low Library" },
+
+  // ---- Sebastian & Helena ----
+  { subGallery:"Sebastian & Helena", category:"Couples", location:"Bethesda Terrace, Central Park", src:"images/couples/sebastian-helena/DSCF0336.JPG", alt:"Couple walking down snowy steps under the Bethesda Terrace arcade" },
+  { subGallery:"Sebastian & Helena", category:"Couples", location:"Bethesda Terrace, Central Park", src:"images/couples/sebastian-helena/DSCF0256.JPG", alt:"Couple dancing under a snow-dusted stone arcade at Bethesda Terrace" },
+  { subGallery:"Sebastian & Helena", category:"Couples", location:"Bethesda Terrace, Central Park", src:"images/couples/sebastian-helena/DSCF0289.JPG", alt:"Couple laughing together under the painted arcade ceiling at Bethesda Terrace" },
+  { subGallery:"Sebastian & Helena", category:"Couples", location:"Bow Bridge, Central Park", src:"images/couples/sebastian-helena/DSCF0132.jpg", alt:"Couple holding hands walking across the snow-covered Bow Bridge" },
+  { subGallery:"Sebastian & Helena", category:"Couples", location:"Bow Bridge, Central Park", src:"images/couples/sebastian-helena/DSCF0167.jpg", alt:"Couple pointing out at the view from the snow-covered Bow Bridge railing" },
+  { subGallery:"Sebastian & Helena", category:"Couples", location:"The Lake, Central Park", src:"images/couples/sebastian-helena/L1520823.jpg", alt:"Portrait by the snow-covered lake with the San Remo towers in the distance" },
+  { subGallery:"Sebastian & Helena", category:"Couples", location:"The Lake, Central Park", src:"images/couples/sebastian-helena/DSCF0204.jpg", alt:"Portrait turning back toward camera beside the snow-covered lake" },
+  { subGallery:"Sebastian & Helena", category:"Couples", location:"The Lake, Central Park", src:"images/couples/sebastian-helena/DSCF0199.jpg", alt:"Portrait beside the snowy lake with ducks and the San Remo towers behind" },
+
+  // ---- Gabby & Family ----
+  { subGallery:"Gabby & Family", category:"Graduation", location:"Madison Square Garden", src:"images/graduation/gabby-family/DSCF6934.jpg", alt:"Graduate on stage with confetti falling at a Madison Square Garden convocation" },
+  { subGallery:"Gabby & Family", category:"Graduation", location:"Madison Square Garden", src:"images/graduation/gabby-family/DSCF6936.JPG", alt:"Family embracing at a Madison Square Garden convocation ceremony" },
+  { subGallery:"Gabby & Family", category:"Graduation", location:"Madison Square Garden", src:"images/graduation/gabby-family/DSCF7031.jpg", alt:"Graduate and family posing outside Madison Square Garden" },
+  { subGallery:"Gabby & Family", category:"Graduation", location:"Greenwich Village", src:"images/graduation/gabby-family/DSCF7062.jpg", alt:"Graduate holding a bouquet on a Greenwich Village street" },
+  { subGallery:"Gabby & Family", category:"Graduation", location:"Greenwich Village", src:"images/graduation/gabby-family/DSCF7094.jpg", alt:"Family portrait at a Greenwich Village street corner" },
+
+  // ---- Rani & Gani ----
+  { subGallery:"Rani & Gani", category:"Couples", location:"DUMBO, Brooklyn", src:"images/couples/rani-gani/DSCF8246.jpg", alt:"Couple holding hands against a DUMBO brick wall" },
+  { subGallery:"Rani & Gani", category:"Couples", location:"DUMBO, Brooklyn", src:"images/couples/rani-gani/DSCF8254.jpg", alt:"Black and white photo of a couple in a DUMBO brick alley" },
+  { subGallery:"Rani & Gani", category:"Couples", location:"DUMBO Waterfront", src:"images/couples/rani-gani/DSCF8261.jpg", alt:"Couple sitting on rocks along the DUMBO waterfront with the Manhattan Bridge behind them" },
+  { subGallery:"Rani & Gani", category:"Couples", location:"DUMBO Waterfront", src:"images/couples/rani-gani/DSCF8265.jpg", alt:"Couple sharing a kiss on the rocks along the DUMBO waterfront" },
+  { subGallery:"Rani & Gani", category:"Couples", location:"Jane's Carousel, DUMBO", src:"images/couples/rani-gani/DSCF8279.jpg", alt:"Couple dancing in front of the lit-up Jane's Carousel in DUMBO" },
+  { subGallery:"Rani & Gani", category:"Couples", location:"Brooklyn Bridge Park", src:"images/couples/rani-gani/DSCF8313.jpg", alt:"Couple mid dance-dip at Brooklyn Bridge Park with One World Trade Center in the distance" },
+  { subGallery:"Rani & Gani", category:"Couples", location:"Brooklyn Bridge Park", src:"images/couples/rani-gani/DSCF8355.jpg", alt:"Couple walking hand in hand under the bridge at Brooklyn Bridge Park" },
+  { subGallery:"Rani & Gani", category:"Couples", location:"Brooklyn Bridge Park", src:"images/couples/rani-gani/DSCF8357.jpg", alt:"Portrait at Brooklyn Bridge Park overlooking the Manhattan skyline" },
+
+  // ---- Janja & Denee ----
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9191.jpg", alt:"Graduate posing in front of Columbia's Alma Mater statue" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9229.jpg", alt:"Two graduates sitting at the base of Columbia's Alma Mater statue" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9253.jpg", alt:"Graduate walking down the steps of a Columbia campus building" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9289.jpg", alt:"Graduate posing by a lamppost on Columbia's campus with Low Library behind her" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9355.jpg", alt:"Graduate leaning against a column on Columbia's campus" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9430.jpg", alt:"Graduate sitting on a bench on Columbia's campus lawn" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9560.jpg", alt:"Two graduates sitting together in front of Columbia's Alma Mater statue" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9613.jpg", alt:"Graduate posing between the columns of Columbia's Low Library" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9639.jpg", alt:"Graduate walking across Columbia's campus lawn in golden light" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9667.jpg", alt:"Two graduates laughing while lying in the grass on Columbia's campus" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9716.jpg", alt:"Two graduates sitting on a stone bench at Columbia University" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9729.jpg", alt:"Graduate standing at the entrance of a Columbia campus building" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9833.jpg", alt:"Graduate posing beside Columbia's lion statue in Columbia sweatshirt" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"116th Street Station", src:"images/graduation/janja-denee/DSCF9879.jpg", alt:"Two graduates at the 116th Street subway station entrance" },
+  { subGallery:"Janja & Denee", category:"Graduation", location:"Columbia University", src:"images/graduation/janja-denee/DSCF9911.jpg", alt:"Two graduates crossing the street on Columbia's campus" },
+
+  // ---- Sarah & Adit ----
+  { subGallery:"Sarah & Adit", category:"Graduation", location:"116th Street Station", src:"images/graduation/sarah-adit/DSCF0813.JPG", alt:"Couple on a subway platform at the 116th Street station" },
+  { subGallery:"Sarah & Adit", category:"Graduation", location:"Central Park", src:"images/graduation/sarah-adit/DSCF0856.jpg", alt:"Couple walking down the steps of a Central Park terrace" },
+  { subGallery:"Sarah & Adit", category:"Graduation", location:"New York City Subway", src:"images/graduation/sarah-adit/L1600585.jpg", alt:"Couple on a subway platform as a train passes" },
+  { subGallery:"Sarah & Adit", category:"Graduation", location:"Central Park", src:"images/graduation/sarah-adit/L1600890.jpg", alt:"Graduate portrait on a stone terrace in Central Park" },
+  { subGallery:"Sarah & Adit", category:"Graduation", location:"Central Park", src:"images/graduation/sarah-adit/L1600959.jpg", alt:"Graduate sitting beneath an ornate painted arcade in Central Park" },
+  { subGallery:"Sarah & Adit", category:"Graduation", location:"Central Park", src:"images/graduation/sarah-adit/L1610119.jpg", alt:"Graduate sitting on a park bench in Central Park" },
+
+  // ---- Tiara & Friends ----
+  { subGallery:"Tiara & Friends", category:"Graduation", location:"Columbia University", src:"images/graduation/tiara-friends/DSCF8775.jpg", alt:"Group of graduates posing around Columbia's Alma Mater statue" },
+  { subGallery:"Tiara & Friends", category:"Graduation", location:"Columbia University", src:"images/graduation/tiara-friends/DSCF8808.jpg", alt:"Group of graduates on the steps of Columbia's Low Library" },
+  { subGallery:"Tiara & Friends", category:"Graduation", location:"Columbia University", src:"images/graduation/tiara-friends/DSCF8830.jpg", alt:"Group of friends laughing on Columbia's campus lawn" },
+  { subGallery:"Tiara & Friends", category:"Graduation", location:"Columbia University", src:"images/graduation/tiara-friends/DSCF9056.jpg", alt:"Group of graduates on a staircase inside a Columbia campus building" },
+  { subGallery:"Tiara & Friends", category:"Graduation", location:"Columbia University", src:"images/graduation/tiara-friends/DSCF9061.jpg", alt:"Group of graduates taking a selfie inside a Columbia campus building" },
+];
+PHOTOS.forEach((p,i)=>{ p.idx = i; });
+
+/* ============================================================
+   ── below here is the engine; you shouldn't need to touch it ──
+   ============================================================ */
+
+/* aspect ratios cycle for visual rhythm of the masonry grid */
+const RATIOS = ["3/4","1/1","4/5","4/3","3/4","1/1","4/5","3/4","4/3","4/5","1/1","3/4"];
+
+/* ---- apply config to the page ---- */
+function applyConfig(){
+  document.querySelectorAll('[data-cfg="name"]').forEach(el => el.textContent = SITE.name);
+  document.querySelectorAll('[data-cfg="location"]').forEach(el => el.textContent = SITE.location);
+  document.querySelectorAll('[data-cfg="est"]').forEach(el => el.textContent = SITE.est);
+
+  const email = document.getElementById('cfgEmail');
+  email.textContent = SITE.email;
+  email.href = "mailto:" + SITE.email;
+
+  const phone = document.getElementById('cfgPhone');
+  phone.textContent = SITE.phone;
+  phone.href = "tel:" + SITE.phoneHref;
+
+  const ig = document.getElementById('cfgIg');
+  ig.textContent = "@" + SITE.instagram;
+  ig.href = SITE.instagramUrl;
+
+  if(COVER.mark){
+    document.getElementById('coverSlot').outerHTML = `
+      <svg class="mark" viewBox="0 0 400 500" role="img" aria-label="NYC.PHOTO logo mark">
+        <circle cx="200" cy="207" r="74" fill="none" stroke="#f3f2ee" stroke-width="9"/>
+        <circle cx="231" cy="176" r="15.5" fill="#c0594e"/>
+        <text x="200" y="336" text-anchor="middle" class="mark-word">NYC.PHOTO</text>
+        <text x="200" y="366" text-anchor="middle" class="mark-kicker">COUPLES &#183; GRADUATION</text>
+      </svg>`;
+  } else if(COVER.src){
+    document.getElementById('coverSlot').outerHTML =
+      `<img src="${COVER.src}" alt="${COVER.alt}" />`;
+  }
+
+  document.title = `NYC.PHOTO — ${SITE.name} · Couples & Graduation Photography`;
+}
+
+const grid = document.getElementById('grid');
+const filters = document.getElementById('filters');
+const cats = ["All", "Couples", "Graduation"];
+let active = "All";
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function frameNo(i){ return String(i+1).padStart(2,"0"); }
+
+/* ordered list of {theme, story, category, photos} blocks for the active filter */
+function visibleGalleries(){
+  const list = active === "All" ? GALLERY_ORDER : GALLERY_ORDER.filter(g => g.category===active);
+  return list.map(g => ({
+    theme: g.theme,
+    story: g.story,
+    category: g.category,
+    photos: PHOTOS.filter(p => p.category===g.category && p.subGallery===g.name),
+  }));
+}
+
+function frameMarkup(p){
+  const ratio = RATIOS[p.idx % RATIOS.length];
+  const inner = p.src
+    ? `<img src="${esc(p.src)}" alt="${esc(p.alt)}" loading="lazy" />`
+    : `<div class="ph" style="aspect-ratio:${ratio}; height:100%;">
+         <span class="swap">Frame ${frameNo(p.idx)}<br/>${esc(p.category)}</span>
+       </div>`;
+  return `
+    <article class="frame" data-index="${p.idx}" tabindex="0" role="button" aria-label="${esc(p.location)}">
+      <span class="frame-corner">${frameNo(p.idx)} →</span>
+      ${inner}
+    </article>`;
+}
+
+function galleryBlockMarkup({theme, story, photos}, gi){
+  const stripId = `fs-${gi}`;
+  const body = photos.length
+    ? `<div class="filmstrip-wrap">
+         <button class="fs-btn fs-prev" data-target="${stripId}" aria-label="Scroll left">‹</button>
+         <div class="filmstrip" id="${stripId}">${photos.map(frameMarkup).join("")}</div>
+         <button class="fs-btn fs-next" data-target="${stripId}" aria-label="Scroll right">›</button>
+       </div>`
+    : `<div class="empty">More from this session — coming soon.</div>`;
+  return `
+    <section class="gallery-block">
+      ${body}
+      <div class="gallery-story">
+        <div>
+          <h3>${esc(theme)}</h3>
+          <span class="count">${photos.length} frame${photos.length===1?'':'s'}</span>
+        </div>
+        <p>${esc(story)}</p>
+      </div>
+    </section>`;
+}
+
+function bindFilmstripButtons(){
+  document.querySelectorAll('.fs-btn').forEach(btn=>{
+    btn.onclick = ()=>{
+      const strip = document.getElementById(btn.dataset.target);
+      const amt = strip.clientWidth * 0.8;
+      strip.scrollBy({ left: btn.classList.contains('fs-prev') ? -amt : amt, behavior:'smooth' });
+    };
+  });
+}
+
+function render(){
+  const blocks = visibleGalleries();
+  grid.innerHTML = blocks.map((b,i)=>galleryBlockMarkup(b,i)).join("");
+  const total = blocks.reduce((n,b)=>n+b.photos.length, 0);
+  document.getElementById('count').textContent = `— ${total} frame${total===1?'':'s'}`;
+  bindFilmstripButtons();
+  observeCells();
+}
+
+/* filters */
+filters.innerHTML = cats.map(c =>
+  `<button data-cat="${esc(c)}" aria-pressed="${c==='All'}">${esc(c)}</button>`
+).join("");
+filters.addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  active = b.dataset.cat;
+  [...filters.children].forEach(x => x.setAttribute('aria-pressed', x===b));
+  render();
+});
+
+/* film-index links in hero jump + filter */
+document.querySelectorAll('.index a').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    const cat = a.dataset.jump;
+    active = cat;
+    [...filters.children].forEach(x => x.setAttribute('aria-pressed', x.dataset.cat===cat));
+    render();
+  });
+});
+
+/* scroll reveal */
+let io;
+function observeCells(){
+  if(io) io.disconnect();
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){ document.querySelectorAll('.frame').forEach(c=>c.classList.add('in')); return; }
+  io = new IntersectionObserver((entries)=>{
+    entries.forEach((en,k)=>{ if(en.isIntersecting){ en.target.style.transitionDelay=(k%4)*50+'ms'; en.target.classList.add('in'); io.unobserve(en.target);} });
+  },{ rootMargin:"0px 0px -8% 0px" });
+  document.querySelectorAll('.frame').forEach(c=>io.observe(c));
+}
+
+/* ============== LIGHTBOX ============== */
+const lb = document.getElementById('lightbox');
+const lbStage = document.getElementById('lbStage');
+const lbCap = document.getElementById('lbCap');
+let viewList = [], viewPos = 0, lastFocus = null;
+
+function openLb(globalIndex){
+  viewList = visibleGalleries().flatMap(b => b.photos);
+  viewPos = viewList.findIndex(p => p.idx===globalIndex);
+  if(viewPos<0) viewPos=0;
+  lastFocus = document.activeElement;
+  paintLb();
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('lbClose').focus();
+}
+function paintLb(){
+  const p = viewList[viewPos];
+  lbStage.innerHTML = p.src
+    ? `<img src="${esc(p.src)}" alt="${esc(p.alt)}" style="max-height:74vh; max-width:88vw;" />`
+    : `<div class="lb-ph"><div class="ph"><span class="swap">Frame ${frameNo(p.idx)}</span></div></div>`;
+  lbCap.innerHTML = `<span>${esc(p.location)}</span><span>${esc(p.category)} · #${frameNo(p.idx)}</span>`;
+}
+function closeLb(){
+  lb.classList.remove('open'); document.body.style.overflow='';
+  if(lastFocus) lastFocus.focus();
+}
+function step(d){ viewPos=(viewPos+d+viewList.length)%viewList.length; paintLb(); }
+
+grid.addEventListener('click', e=>{
+  const frame = e.target.closest('.frame'); if(!frame) return;
+  openLb(Number(frame.dataset.index));
+});
+grid.addEventListener('keydown', e=>{
+  if(e.key==='Enter' || e.key===' '){ const frame=e.target.closest('.frame'); if(frame){ e.preventDefault(); openLb(Number(frame.dataset.index)); } }
+});
+document.getElementById('lbClose').onclick = closeLb;
+document.getElementById('lbPrev').onclick = ()=>step(-1);
+document.getElementById('lbNext').onclick = ()=>step(1);
+lb.addEventListener('click', e=>{ if(e.target===lb) closeLb(); });
+document.addEventListener('keydown', e=>{
+  if(!lb.classList.contains('open')) return;
+  if(e.key==='Escape') closeLb();
+  if(e.key==='ArrowRight') step(1);
+  if(e.key==='ArrowLeft') step(-1);
+});
+
+/* ---- boot ---- */
+applyConfig();
+render();
+</script>
+</body>
+</html>
