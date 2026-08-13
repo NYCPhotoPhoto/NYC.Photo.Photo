@@ -1001,9 +1001,13 @@ render();
   if(!nav || !cover) return;
   var setH = function(){ document.documentElement.style.setProperty('--navh', nav.offsetHeight + 'px'); };
   setH(); window.addEventListener('resize', setH);
-  new IntersectionObserver(function(e){
-    nav.classList.toggle('nav--over', e[0].intersectionRatio > 0.12);
-  }, {threshold:[0,0.12,0.5]}).observe(cover);
+  var upd = function(){
+    nav.classList.toggle('nav--over', window.scrollY < cover.offsetHeight - nav.offsetHeight - 4);
+  };
+  upd();
+  window.addEventListener('scroll', upd, {passive:true});
+  window.addEventListener('resize', upd);
+  window.addEventListener('load', upd);
 })();
 </script>
 </body>
