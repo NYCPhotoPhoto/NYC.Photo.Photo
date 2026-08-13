@@ -13,15 +13,15 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="NYC.PHOTO" />
 <meta property="og:url" content="https://nycphotophoto.github.io/NYC.Photo.Photo/" />
-<meta property="og:image" content="https://nycphotophoto.github.io/NYC.Photo.Photo/images/graduation/janja-denee/DSCF9560.jpg" />
+<meta property="og:image" content="https://nycphotophoto.github.io/NYC.Photo.Photo/images/graduation/janja-denee/DSCF9667.jpg" />
 <meta property="og:image:width" content="1600" />
 <meta property="og:image:height" content="1066" />
-<meta property="og:image:alt" content="Graduate in a Columbia gown seated in front of the columns of Low Library." />
+<meta property="og:image:alt" content="Two graduates lying in the grass on Columbia's lawn, holding their caps up to the camera." />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="NYC.PHOTO — Graduation &amp; Couples Photography in New York" />
 <meta name="twitter:description" content="Columbia, NYU and Central Park. $125/hr, all the edited photos back within a week." />
-<meta name="twitter:image" content="https://nycphotophoto.github.io/NYC.Photo.Photo/images/graduation/janja-denee/DSCF9560.jpg" />
+<meta name="twitter:image" content="https://nycphotophoto.github.io/NYC.Photo.Photo/images/graduation/janja-denee/DSCF9667.jpg" />
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2316161a'/%3E%3Ccircle cx='16' cy='17' r='7' fill='none' stroke='%23f3f2ee' stroke-width='2.4'/%3E%3Ccircle cx='19.4' cy='13.6' r='2.3' fill='%23c0594e'/%3E%3C/svg%3E" />
 
@@ -129,6 +129,63 @@ a{ color:inherit; }
 }
 .nav-links a:hover{ color:var(--ink); }
 .nav-links a:hover::after{ width:100%; }
+
+/* ============================================================
+   COVER — full-bleed opening frame
+   ============================================================ */
+.cover{
+  position:relative; width:100%; height:100svh; min-height:540px;
+  overflow:hidden; margin-top:calc(-1 * var(--navh, 63px));
+}
+.cover-img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center 62%;
+  max-width:none;
+}
+.cover::after{
+  content:""; position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(180deg, rgba(12,12,14,.62) 0%, rgba(12,12,14,.42) 34%,
+                            rgba(12,12,14,.10) 58%, rgba(12,12,14,.46) 100%);
+}
+.cover-inner{
+  position:absolute; inset:0; z-index:2;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  text-align:center; padding:clamp(96px,17vh,190px) var(--gut) 0;
+}
+.cover-kicker{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.34em; text-transform:uppercase;
+  color:rgba(247,246,242,.72); margin:0 0 26px;
+}
+.cover-title{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(28px,4.7vw,60px); line-height:1.14; letter-spacing:.004em;
+  color:#f7f6f2; margin:0; max-width:20ch;
+  text-shadow:0 2px 40px rgba(0,0,0,.4);
+}
+.cover-rule{
+  position:absolute; left:50%; transform:translateX(-50%); bottom:15%;
+  width:min(80vw,1140px); height:1px; background:rgba(247,246,242,.5); z-index:2;
+}
+.cover-scroll{
+  position:absolute; left:50%; transform:translateX(-50%); bottom:30px; z-index:3;
+  display:flex; flex-direction:column; align-items:center; gap:11px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.26em; text-transform:uppercase;
+  color:rgba(247,246,242,.82); text-decoration:none;
+}
+.cover-scroll::after{
+  content:""; width:1px; height:34px;
+  background:linear-gradient(rgba(247,246,242,.85), rgba(247,246,242,0));
+}
+.nav--over{ background:transparent; backdrop-filter:none; border-bottom-color:transparent; }
+.nav--over .brand{ color:#f7f6f2; }
+.nav--over .nav-links a{ color:rgba(247,246,242,.86); }
+.nav--over .nav-links a:hover{ color:#fff; }
+.nav--over .nav-links a::after{ background:#fff; }
+@media (max-width:620px){
+  .cover-rule{ bottom:17%; width:86vw; }
+  .cover-title{ max-width:16ch; }
+}
 
 /* ============================================================
    HERO  — masthead + film index + cover frame
@@ -486,25 +543,15 @@ footer{
   </div>
 </nav>
 
-<!-- ======================= HERO ======================= -->
-<header id="top" class="hero">
-  <div>
-    <div class="kicker">New York, NY <span class="rule"></span> Est. <span data-cfg="est"></span></div>
-    <h1 class="masthead"><em>The day</em><span class="thin">everything</span><em>changed.</em></h1>
-    <p class="lede">Couples, graduation, proposals, engagements, and the moment you toss the cap, all shot around New York.</p>
-
-    <nav class="index" aria-label="Work categories">
-      <a href="#work" data-jump="Couples"><span class="no">01</span> Couples <span class="meta">— together, in love</span></a>
-      <a href="#work" data-jump="Graduation"><span class="no">02</span> Graduation <span class="meta">— caps off</span></a>
-    </nav>
+<!-- ======================= COVER ======================= -->
+<header id="top" class="cover">
+  <img class="cover-img" src="images/graduation/janja-denee/DSCF9667.jpg" alt="Two graduates lying in the grass on Columbia's lawn, holding their caps up to the camera." />
+  <div class="cover-inner">
+    <p class="cover-kicker">New York, NY</p>
+    <h1 class="cover-title">Your moment captured with honesty</h1>
   </div>
-
-  <div class="cover">
-    <!-- Cover photo: set COVER.src in the config below to your hero shot -->
-    <div id="coverSlot" class="ph" aria-hidden="true">
-      <span class="swap">Cover frame<br/>add your hero shot</span>
-    </div>
-  </div>
+  <div class="cover-rule"></div>
+  <a class="cover-scroll" href="#work">Selected work</a>
 </header>
 
 <!-- ======================= WORK ======================= -->
@@ -756,7 +803,7 @@ function applyConfig(){
       (SITE.whatsappMsg ? `?text=${encodeURIComponent(SITE.whatsappMsg)}` : "");
   }
 
-  if(COVER.mark){
+  if(document.getElementById('coverSlot') && COVER.mark){
     document.getElementById('coverSlot').outerHTML = `
       <svg class="mark" viewBox="0 0 400 500" role="img" aria-label="NYC.PHOTO logo mark">
         <circle cx="200" cy="207" r="74" fill="none" stroke="#f3f2ee" stroke-width="9"/>
@@ -764,7 +811,7 @@ function applyConfig(){
         <text x="200" y="336" text-anchor="middle" class="mark-word">NYC.PHOTO</text>
         <text x="200" y="366" text-anchor="middle" class="mark-kicker">COUPLES &#183; GRADUATION</text>
       </svg>`;
-  } else if(COVER.src){
+  } else if(document.getElementById('coverSlot') && COVER.src){
     document.getElementById('coverSlot').outerHTML =
       `<img src="${COVER.src}" alt="${COVER.alt}" />`;
   }
@@ -947,6 +994,17 @@ document.addEventListener('keydown', e=>{
 /* ---- boot ---- */
 applyConfig();
 render();
+</script>
+<script>
+(function(){
+  var nav = document.querySelector('.nav'), cover = document.querySelector('.cover');
+  if(!nav || !cover) return;
+  var setH = function(){ document.documentElement.style.setProperty('--navh', nav.offsetHeight + 'px'); };
+  setH(); window.addEventListener('resize', setH);
+  new IntersectionObserver(function(e){
+    nav.classList.toggle('nav--over', e[0].intersectionRatio > 0.12);
+  }, {threshold:[0,0.12,0.5]}).observe(cover);
+})();
 </script>
 </body>
 </html>
